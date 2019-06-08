@@ -80,7 +80,7 @@ with the more idiomatic [string templates][string-templates] Kotlin provides.
 ```kotlin
 import com.github.michaelbull.logging.InlineLogger
 
-val logger = InlineLogger()
+val logger = InlineLogger("CalculationLogger")
 
 fun expensiveCalculation(): Int {
     return 1234 * 5678
@@ -106,22 +106,19 @@ public final class ExampleKt {
     private static final Logger logger;
 
     @NotNull
-    public static final Logger getLogger() {
+    public static Logger getLogger() {
         return logger;
     }
 
-    public static final int expensiveCalculation() {
+    public static int expensiveCalculation() {
         return 1234 * 5678;
     }
 
-    public static final void main() {
+    public static void main() {
         Logger $this$iv = logger;
-        boolean $i$f$warn = false;
-        if (InlineLogger.isWarnEnabled-impl((Logger)$this$iv)) {
-            Logger logger = $this$iv;
-            boolean bl = false;
+        if (InlineLogger.isWarnEnabled-impl((Logger) $this$iv)) {
             String string = "The result is: " + ExampleKt.expensiveCalculation();
-            logger.warn(String.valueOf(string));
+            $this$iv.warn(String.valueOf(string));
         }
     }
 
@@ -130,9 +127,8 @@ public final class ExampleKt {
     }
 
     static {
-        boolean $i$f$InlineLogger = false;
         Logger delegate$iv = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-        logger = InlineLogger.constructor-impl((Logger)delegate$iv);
+        logger = InlineLogger.constructor-impl((Logger) delegate$iv);
     }
 }
 ```
