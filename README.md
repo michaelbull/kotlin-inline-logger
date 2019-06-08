@@ -30,7 +30,7 @@ to open a pull request on [GitHub][github].
 
 On the JVM, `kotlin-inline-logger` provides inline functions that delegate
 to [SLF4J][slf4j]. Users migrating from an existing SLF4J solution will find
-their existing calls to methods, e.g. `logger.info("Example")` now marked as
+existing calls to logging functions like `logger.info("Example")` now marked as
 `@Deprecated`, prompting them to replace their existing code with the
 lazily-evaluated alternatives.
 
@@ -42,15 +42,21 @@ By default, passing no argument when creating an `InlineLogger()` will utilise
 `MethodHandles.lookup()`, introduced in JDK7, to derive the name of the logger
 from the class that created it. This is described in SLF4J's documentation as
 an [idiomatic method of declaring a logger][slf4j-idiom] that is resistant to
-cut-and-pasting between classes.
+cut-and-paste errors:
 
-Named loggers can be created by passing a name:
+```kotlin
+class TransactionExecutor {
+    val transactionLogger = InlineLogger() // named com.package.TransactionExecutor
+}
+```
+
+Named loggers can be created by passing a `String`:
 
 ```kotlin
 val transactionLogger = InlineLogger("DatabaseTransactions")
 ```
 
-Class loggers can be created by passing the `::class` reference:
+Class loggers can be created by passing a `::class` reference:
 
 ```kotlin
 class TransactionExecutor
