@@ -95,8 +95,6 @@ fun main() {
 
 ```java
 import com.github.michaelbull.logging.InlineLogger;
-import java.lang.invoke.MethodHandles;
-import kotlin.Metadata;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -127,7 +125,7 @@ public final class ExampleKt {
     }
 
     static {
-        Logger delegate$iv = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+        Logger delegate$iv = LoggerFactory.getLogger("CalculationLogger");
         logger = InlineLogger.constructor-impl((Logger) delegate$iv);
     }
 }
