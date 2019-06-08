@@ -85,7 +85,7 @@ fun main() {
 }
 ```
 
-##### Compiled Java:
+##### Decompiled Java:
 
 ```java
 import com.github.michaelbull.logging.InlineLogger;
