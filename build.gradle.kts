@@ -54,6 +54,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
+                implementation("org.slf4j:slf4j-jdk14:1.7.26")
             }
         }
     }
