@@ -88,6 +88,10 @@ val bintrayUpload by tasks.existing(BintrayUploadTask::class) {
     dependsOn("build")
     dependsOn("generatePomFileForJvmPublication")
     dependsOn("generatePomFileForMetadataPublication")
+    dependsOn("jvmJar")
+    dependsOn("jvmSourcesJar")
+    dependsOn("metadataJar")
+    dependsOn("metadataSourcesJar")
 }
 
 tasks.named("afterReleaseBuild") {
