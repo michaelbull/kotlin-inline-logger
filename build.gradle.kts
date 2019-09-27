@@ -1,3 +1,4 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import com.jfrog.bintray.gradle.BintrayExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 
@@ -5,15 +6,23 @@ description = "A logger facilitating lazily-evaluated log calls via Kotlin's inl
 
 plugins {
     `maven-publish`
-    kotlin("multiplatform") version ("1.3.31")
-    id("com.github.ben-manes.versions") version ("0.21.0")
+    kotlin("multiplatform") version ("1.3.50")
+    id("com.github.ben-manes.versions") version ("0.25.0")
     id("com.jfrog.bintray") version ("1.8.4")
-    id("net.researchgate.release") version ("2.8.0")
+    id("net.researchgate.release") version ("2.8.1")
 }
 
 repositories {
     mavenCentral()
     jcenter()
+}
+
+tasks.withType<DependencyUpdatesTask> {
+    rejectVersionIf {
+        listOf("alpha", "beta", "rc", "cr", "m", "eap", "pr").any {
+            candidate.version.contains(it, ignoreCase = true)
+        }
+    }
 }
 
 kotlin {
@@ -41,7 +50,7 @@ kotlin {
 
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
-                implementation("org.slf4j:slf4j-api:1.7.26")
+                implementation("org.slf4j:slf4j-api:1.7.28")
             }
         }
 
@@ -54,7 +63,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation("org.slf4j:slf4j-jdk14:1.7.26")
+                implementation("org.slf4j:slf4j-jdk14:1.7.28")
             }
         }
     }
