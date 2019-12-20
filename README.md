@@ -1,6 +1,6 @@
 # kotlin-inline-logger
 
-[![Release](https://api.bintray.com/packages/michaelbull/maven/kotlin-inline-logger/images/download.svg)](https://bintray.com/michaelbull/maven/kotlin-inline-logger/_latestVersion) [![Build Status](https://travis-ci.org/michaelbull/kotlin-inline-logger.svg?branch=master)](https://travis-ci.org/michaelbull/kotlin-inline-logger) [![License](https://img.shields.io/github/license/michaelbull/kotlin-inline-logger.svg)](https://github.com/michaelbull/kotlin-inline-logger/blob/master/LICENSE)
+[![Release](https://api.bintray.com/packages/michaelbull/maven/kotlin-inline-logger/images/download.svg)](https://bintray.com/michaelbull/maven/kotlin-inline-logger/_latestVersion) [![CI Status](https://github.com/michaelbull/kotlin-inline-logger/workflows/ci/badge.svg)](https://github.com/michaelbull/kotlin-inline-logger/actions?query=workflow%3Aci) [![License](https://img.shields.io/github/license/michaelbull/kotlin-inline-logger.svg)](https://github.com/michaelbull/kotlin-inline-logger/blob/master/LICENSE)
 
 A logger facilitating lazily-evaluated log calls via Kotlin's inline [classes][inline-classes] & [functions][inline-functions].
 
