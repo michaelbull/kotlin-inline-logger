@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.michael-bull.kotlin-inline-logger:kotlin-inline-logger-jvm:1.0.0'
+    compile 'com.michael-bull.kotlin-inline-logger:kotlin-inline-logger-jvm:1.0.1'
 }
 ```
 
