@@ -6,15 +6,10 @@ description = "A logger facilitating lazily-evaluated log calls via Kotlin's inl
 
 plugins {
     `maven-publish`
-    kotlin("multiplatform") version ("1.3.50")
-    id("com.github.ben-manes.versions") version ("0.25.0")
-    id("com.jfrog.bintray") version ("1.8.4")
-    id("net.researchgate.release") version ("2.8.1")
-}
-
-repositories {
-    mavenCentral()
-    jcenter()
+    kotlin("multiplatform") version "1.3.61"
+    id("com.github.ben-manes.versions") version "0.27.0"
+    id("com.jfrog.bintray") version "1.8.4"
+    id("net.researchgate.release") version "2.8.1"
 }
 
 tasks.withType<DependencyUpdatesTask> {
@@ -23,6 +18,11 @@ tasks.withType<DependencyUpdatesTask> {
             candidate.version.contains(it, ignoreCase = true)
         }
     }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
 }
 
 kotlin {
@@ -50,7 +50,7 @@ kotlin {
 
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
-                implementation("org.slf4j:slf4j-api:1.7.28")
+                implementation("org.slf4j:slf4j-api:1.7.30")
             }
         }
 
@@ -63,7 +63,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation("org.slf4j:slf4j-jdk14:1.7.28")
+                implementation("org.slf4j:slf4j-jdk14:1.7.30")
             }
         }
     }
