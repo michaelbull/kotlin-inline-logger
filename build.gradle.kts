@@ -1,14 +1,15 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import com.jfrog.bintray.gradle.BintrayExtension
-import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
+
+val ossrhUsername: String? by ext
+val ossrhPassword: String? by ext
 
 description = "A logger facilitating lazily-evaluated log calls via Kotlin's inline classes & functions."
 
 plugins {
     `maven-publish`
+    signing
     kotlin("multiplatform") version "1.3.61"
     id("com.github.ben-manes.versions") version "0.27.0"
-    id("com.jfrog.bintray") version "1.8.4"
     id("net.researchgate.release") version "2.8.1"
 }
 
@@ -22,7 +23,6 @@ tasks.withType<DependencyUpdatesTask> {
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 kotlin {
@@ -69,40 +69,74 @@ kotlin {
     }
 }
 
-fun BintrayExtension.pkg(configure: BintrayExtension.PackageConfig.() -> Unit) {
-    pkg(delegateClosureOf(configure))
+signing {
+    useGpgCmd()
+    sign(publishing.publications)
 }
 
-val bintrayUser: String? by project
-val bintrayKey: String? by project
+publishing {
+    repositories {
+        maven {
+            if (project.version.toString().endsWith("SNAPSHOT")) {
+                setUrl("https://oss.sonatype.org/content/repositories/snapshots")
+            } else {
+                setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2")
+            }
 
-bintray {
-    user = bintrayUser
-    key = bintrayKey
-    setPublications("jvm", "metadata")
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+    }
 
-    pkg {
-        repo = "maven"
-        name = project.name
-        desc = project.description
-        websiteUrl = "https://github.com/michaelbull/kotlin-inline-logger"
-        issueTrackerUrl = "https://github.com/michaelbull/kotlin-inline-logger/issues"
-        vcsUrl = "git@github.com:michaelbull/kotlin-inline-logger.git"
-        githubRepo = "michaelbull/kotlin-inline-logger"
-        setLicenses("ISC")
+    publications.withType<MavenPublication> {
+        pom {
+            name.set(project.name)
+            description.set(project.description)
+            url.set("https://github.com/michaelbull/kotlin-inline-logger")
+            inceptionYear.set("2019")
+
+            licenses {
+                license {
+                    name.set("ISC License")
+                    url.set("https://opensource.org/licenses/isc-license.txt")
+                }
+            }
+
+            developers {
+                developer {
+                    name.set("Michael Bull")
+                    url.set("https://www.michael-bull.com")
+                }
+            }
+
+            scm {
+                connection.set("scm:git:https://github.com/michaelbull/kotlin-inline-logger")
+                developerConnection.set("scm:git:git@github.com:michaelbull/kotlin-inline-logger.git")
+                url.set("https://github.com/michaelbull/kotlin-inline-logger")
+            }
+
+            issueManagement {
+                system.set("GitHub")
+                url.set("https://github.com/michaelbull/kotlin-inline-logger/issues")
+            }
+
+            ciManagement {
+                system.set("GitHub")
+                url.set("https://github.com/michaelbull/kotlin-inline-logger/actions?query=workflow%3Aci")
+            }
+
+            contributors {
+                contributor {
+                    name.set("Toby-S")
+                    url.set("https://github.com/Toby-S")
+                }
+            }
+        }
     }
 }
 
-val bintrayUpload by tasks.existing(BintrayUploadTask::class) {
-    dependsOn("build")
-    dependsOn("generatePomFileForJvmPublication")
-    dependsOn("generatePomFileForMetadataPublication")
-    dependsOn("jvmJar")
-    dependsOn("jvmSourcesJar")
-    dependsOn("metadataJar")
-    dependsOn("metadataSourcesJar")
-}
-
-tasks.named("afterReleaseBuild") {
-    dependsOn(bintrayUpload)
+tasks.afterReleaseBuild {
+    dependsOn(tasks.publish)
 }

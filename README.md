@@ -1,6 +1,6 @@
 # kotlin-inline-logger
 
-[![Release](https://api.bintray.com/packages/michaelbull/maven/kotlin-inline-logger/images/download.svg)](https://bintray.com/michaelbull/maven/kotlin-inline-logger/_latestVersion) [![CI Status](https://github.com/michaelbull/kotlin-inline-logger/workflows/ci/badge.svg)](https://github.com/michaelbull/kotlin-inline-logger/actions?query=workflow%3Aci) [![License](https://img.shields.io/github/license/michaelbull/kotlin-inline-logger.svg)](https://github.com/michaelbull/kotlin-inline-logger/blob/master/LICENSE)
+[![Maven Central](https://img.shields.io/maven-central/v/com.michael-bull.kotlin-inline-logger/kotlin-inline-logger.svg)](https://search.maven.org/search?q=g:com.michael-bull.kotlin-inline-logger) [![CI Status](https://github.com/michaelbull/kotlin-inline-logger/workflows/ci/badge.svg)](https://github.com/michaelbull/kotlin-inline-logger/actions?query=workflow%3Aci) [![License](https://img.shields.io/github/license/michaelbull/kotlin-inline-logger.svg)](https://github.com/michaelbull/kotlin-inline-logger/blob/master/LICENSE)
 
 A logger facilitating lazily-evaluated log calls via Kotlin's inline [classes][inline-classes] & [functions][inline-functions].
 
@@ -8,11 +8,11 @@ A logger facilitating lazily-evaluated log calls via Kotlin's inline [classes][i
 
 ```groovy
 repositories {
-    maven { url = 'https://dl.bintray.com/michaelbull/maven' }
+    mavenCentral()
 }
 
 dependencies {
-    compile 'com.michael-bull.kotlin-inline-logger:kotlin-inline-logger-jvm:1.0.1'
+    implementation("com.michael-bull.kotlin-inline-logger:kotlin-inline-logger:1.0.2")
 }
 ```
 
