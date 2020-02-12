@@ -1,4 +1,5 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.jetbrains.dokka.gradle.DokkaTask
 
 val ossrhUsername: String? by ext
 val ossrhPassword: String? by ext
@@ -9,6 +10,7 @@ plugins {
     `maven-publish`
     signing
     kotlin("multiplatform") version "1.3.61"
+    id("org.jetbrains.dokka") version "0.10.1"
     id("com.github.ben-manes.versions") version "0.27.0"
     id("net.researchgate.release") version "2.8.1"
 }
@@ -21,8 +23,22 @@ tasks.withType<DependencyUpdatesTask> {
     }
 }
 
+val dokka by tasks.existing(DokkaTask::class) {
+    outputFormat = "javadoc"
+    outputDirectory = "$buildDir/docs/javadoc"
+}
+
+val javadocJar by tasks.registering(Jar::class) {
+    group = LifecycleBasePlugin.BUILD_GROUP
+    description = "Assembles a jar archive containing the Javadoc API documentation."
+    archiveClassifier.set("javadoc")
+    dependsOn(dokka)
+    from(dokka.get().outputDirectory)
+}
+
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 kotlin {
@@ -66,12 +82,11 @@ kotlin {
                 implementation("org.slf4j:slf4j-jdk14:1.7.30")
             }
         }
-    }
-}
 
-signing {
-    useGpgCmd()
-    sign(publishing.publications)
+        mavenPublication {
+            artifact(javadocJar.get())
+        }
+    }
 }
 
 publishing {
@@ -135,6 +150,11 @@ publishing {
             }
         }
     }
+}
+
+signing {
+    useGpgCmd()
+    sign(publishing.publications)
 }
 
 tasks.afterReleaseBuild {
