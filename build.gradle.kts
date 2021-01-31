@@ -1,8 +1,12 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.jetbrains.dokka.gradle.DokkaTask
 
-val ossrhUsername: String? by ext
-val ossrhPassword: String? by ext
+val ossrhUsername: String? by project
+val ossrhPassword: String? by project
+
+val signingKeyId: String? by project // must be the last 8 digits of the key
+val signingKey: String? by project
+val signingPassword: String? by project
 
 description = "A logger facilitating lazily-evaluated log calls via Kotlin's inline classes & functions."
 
@@ -152,6 +156,6 @@ publishing {
 }
 
 signing {
-    useGpgCmd()
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
     sign(publishing.publications)
 }
