@@ -12,7 +12,6 @@ plugins {
     kotlin("multiplatform") version "1.3.61"
     id("org.jetbrains.dokka") version "0.10.1"
     id("com.github.ben-manes.versions") version "0.27.0"
-    id("net.researchgate.release") version "2.8.1"
 }
 
 tasks.withType<DependencyUpdatesTask> {
@@ -155,8 +154,4 @@ publishing {
 signing {
     useGpgCmd()
     sign(publishing.publications)
-}
-
-tasks.afterReleaseBuild {
-    dependsOn(tasks.publish)
 }
