@@ -9,9 +9,9 @@ description = "A logger facilitating lazily-evaluated log calls via Kotlin's inl
 plugins {
     `maven-publish`
     signing
-    kotlin("multiplatform") version "1.3.61"
+    kotlin("multiplatform") version "1.4.21-2"
     id("org.jetbrains.dokka") version "0.10.1"
-    id("com.github.ben-manes.versions") version "0.27.0"
+    id("com.github.ben-manes.versions") version "0.36.0"
 }
 
 tasks.withType<DependencyUpdatesTask> {
