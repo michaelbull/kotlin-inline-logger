@@ -150,6 +150,11 @@ publishing {
                     name.set("Toby-S")
                     url.set("https://github.com/Toby-S")
                 }
+
+                contributor {
+                    name.set("Richard Gomez")
+                    url.set("https://github.com/rgmz")
+                }
             }
         }
     }
