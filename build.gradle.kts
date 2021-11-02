@@ -14,8 +14,8 @@ plugins {
     `maven-publish`
     signing
     kotlin("multiplatform") version "1.5.31"
-    id("org.jetbrains.dokka") version "0.10.1"
-    id("com.github.ben-manes.versions") version "0.36.0"
+    id("org.jetbrains.dokka") version "1.5.31"
+    id("com.github.ben-manes.versions") version "0.39.0"
 }
 
 tasks.withType<DependencyUpdatesTask> {
@@ -26,17 +26,13 @@ tasks.withType<DependencyUpdatesTask> {
     }
 }
 
-val dokka by tasks.existing(DokkaTask::class) {
-    outputFormat = "javadoc"
-    outputDirectory = "$buildDir/docs/javadoc"
-}
+val dokkaHtml by tasks.existing(DokkaTask::class)
 
 val javadocJar by tasks.registering(Jar::class) {
     group = LifecycleBasePlugin.BUILD_GROUP
     description = "Assembles a jar archive containing the Javadoc API documentation."
     archiveClassifier.set("javadoc")
-    dependsOn(dokka)
-    from(dokka.get().outputDirectory)
+    from(dokkaHtml)
 }
 
 repositories {
