@@ -1,13 +1,15 @@
 package com.github.michaelbull.logging
 
+import kotlin.jvm.JvmInline
 import kotlin.reflect.KClass
 
 expect inline fun InlineLogger(): InlineLogger
 expect inline fun InlineLogger(name: String): InlineLogger
 expect inline fun <T : Any> InlineLogger(clazz: KClass<T>): InlineLogger
 
+@JvmInline
 @Suppress("unused", "DeprecatedCallableAddReplaceWith")
-inline class InlineLogger(val delegate: Logger) {
+value class InlineLogger(val delegate: Logger) {
 
     val name: String get() = delegate.getName()
 
