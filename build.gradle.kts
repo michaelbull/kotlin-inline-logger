@@ -13,8 +13,8 @@ description = "A logger facilitating lazily-evaluated log calls via Kotlin's inl
 plugins {
     `maven-publish`
     signing
-    kotlin("multiplatform") version "1.5.31"
-    id("org.jetbrains.dokka") version "1.5.31"
+    kotlin("multiplatform") version "1.7.21"
+    id("org.jetbrains.dokka") version "1.7.20"
     id("com.github.ben-manes.versions") version "0.39.0"
 }
 
