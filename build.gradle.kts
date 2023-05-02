@@ -13,9 +13,10 @@ description = "A logger facilitating lazily-evaluated log calls via Kotlin's inl
 plugins {
     `maven-publish`
     signing
-    kotlin("multiplatform") version "1.8.21"
-    id("org.jetbrains.dokka") version "1.8.10"
-    id("com.github.ben-manes.versions") version "0.46.0"
+
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.versions)
 }
 
 tasks.withType<DependencyUpdatesTask> {
@@ -40,14 +41,16 @@ repositories {
 }
 
 kotlin {
+    jvmToolchain(8)
+
     sourceSets {
-        named("commonMain") {
+        commonMain {
             dependencies {
                 implementation(kotlin("stdlib-common"))
             }
         }
 
-        named("commonTest") {
+        commonTest {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
@@ -57,27 +60,17 @@ kotlin {
 
     jvm {
         compilations.named("main") {
-            kotlinOptions {
-                jvmTarget = "1.8"
-                freeCompilerArgs = listOf("-Xno-call-assertions", "-Xno-receiver-assertions", "-Xno-param-assertions")
-            }
-
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
-                implementation("org.slf4j:slf4j-api:2.0.7")
+                implementation(libs.slf4j.api)
             }
         }
 
         compilations.named("test") {
-            kotlinOptions {
-                jvmTarget = "1.8"
-                freeCompilerArgs = listOf("-Xno-call-assertions", "-Xno-receiver-assertions", "-Xno-param-assertions")
-            }
-
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation("org.slf4j:slf4j-jdk14:2.0.7")
+                implementation(libs.slf4j.jdk14)
             }
         }
 

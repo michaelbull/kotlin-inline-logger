@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package com.github.michaelbull.logging
 
 import kotlin.test.Test
@@ -24,5 +22,4 @@ class InlineLoggerTest {
         val logger = InlineLogger()
         assertEquals("com.github.michaelbull.logging.InlineLoggerTest", logger.name)
     }
-
 }
