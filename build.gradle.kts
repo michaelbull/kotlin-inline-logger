@@ -13,9 +13,9 @@ description = "A logger facilitating lazily-evaluated log calls via Kotlin's inl
 plugins {
     `maven-publish`
     signing
-    kotlin("multiplatform") version "1.7.21"
-    id("org.jetbrains.dokka") version "1.7.20"
-    id("com.github.ben-manes.versions") version "0.39.0"
+    kotlin("multiplatform") version "1.8.21"
+    id("org.jetbrains.dokka") version "1.8.10"
+    id("com.github.ben-manes.versions") version "0.46.0"
 }
 
 tasks.withType<DependencyUpdatesTask> {
@@ -37,7 +37,6 @@ val javadocJar by tasks.registering(Jar::class) {
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 kotlin {
@@ -65,7 +64,7 @@ kotlin {
 
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
-                implementation("org.slf4j:slf4j-api:1.7.30")
+                implementation("org.slf4j:slf4j-api:2.0.7")
             }
         }
 
@@ -78,7 +77,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation("org.slf4j:slf4j-jdk14:1.7.30")
+                implementation("org.slf4j:slf4j-jdk14:2.0.7")
             }
         }
 
