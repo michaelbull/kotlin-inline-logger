@@ -143,6 +143,11 @@ publishing {
                     name.set("Richard Gomez")
                     url.set("https://github.com/rgmz")
                 }
+
+                contributor {
+                    name.set("Sebastian Schuberth")
+                    url.set("https://github.com/sschuberth")
+                }
             }
         }
     }
