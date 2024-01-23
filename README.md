@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.michael-bull.kotlin-inline-logger:kotlin-inline-logger:1.0.5")
+    implementation("com.michael-bull.kotlin-inline-logger:kotlin-inline-logger:1.0.6")
 }
 ```
 
